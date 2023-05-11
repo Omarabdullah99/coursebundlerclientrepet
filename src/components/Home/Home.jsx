@@ -37,7 +37,7 @@ const Home = () => {
 
        <div className="home_video">
         <video src={introVideo} 
-        autoPlay controls
+         controls
         controlsList='nodownload nofullscreen  noremoteplayback'
         disablePictureInPicture
         disableRemotePlayback        >

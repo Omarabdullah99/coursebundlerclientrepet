@@ -6,6 +6,7 @@ import Sidebar from "./components/Layout/Header/Sidebar";
 import Backdrop from "./components/Layout/Header/Backdrop";
 import Courses from "./components/Courses/Courses";
 import Footer from "./components/Layout/Footer/Footer";
+import Login from "./components/Auth/Login";
 
 function App() {
   const [sidebar,setSidebar]= useState(false)
@@ -22,6 +23,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
+        
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </Router>

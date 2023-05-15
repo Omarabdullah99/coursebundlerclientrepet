@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './Header.css'
 const Sidebar = ({sidebar,closeSidebar}) => {
-    const isAuthenticated=true;
+    const isAuthenticated=false;
     const user={
         role:"admin"
     }

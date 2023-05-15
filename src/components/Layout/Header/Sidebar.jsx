@@ -9,7 +9,7 @@ const Sidebar = ({sidebar,closeSidebar}) => {
   return (
    <div className={sidebar?"sidebar sidebar-open": "sidebar" }>
       <Link to='/' onClick={closeSidebar}><li>Home</li></Link>
-      <Link to='/allcourse' onClick={closeSidebar}><li>Browser All Courses</li></Link>
+      <Link to='/courses' onClick={closeSidebar}><li>Browser All Courses</li></Link>
       <Link to='/request' onClick={closeSidebar}><li>Request a Course</li></Link>
       <Link to='/contact' onClick={closeSidebar}><li>Contact Us</li></Link>
       <Link to='/about' onClick={closeSidebar}><li>About</li></Link>

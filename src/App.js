@@ -4,7 +4,7 @@ import Home from "./components/Home/Home";
 import Header from "./components/Layout/Header/Header";
 import Sidebar from "./components/Layout/Header/Sidebar";
 import Backdrop from "./components/Layout/Header/Backdrop";
-import Allcourse from "./components/Allcourse/Allcourse";
+import Courses from "./components/Courses/Courses";
 
 function App() {
   const [sidebar,setSidebar]= useState(false)
@@ -20,7 +20,7 @@ function App() {
     <Sidebar sidebar={sidebar} closeSidebar={toggleSidebar}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/allcourse" element={<Allcourse />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
     </Router>
   );

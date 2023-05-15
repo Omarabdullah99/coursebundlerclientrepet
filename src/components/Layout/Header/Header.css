@@ -1,3 +1,4 @@
+/* Header.jsx e style */
 .toll-bar{
     background-color: #222f3e;
     color: #fff;
@@ -8,7 +9,9 @@
     padding: 1.5rem;
     cursor: pointer;
 }
+/* Header.jsx e style end  */
 
+/* Sidebar.jsx e style */
 .sidebar{
     position: absolute;
     background-color: #222f3e;
@@ -38,7 +41,9 @@
     transform: translateX(0%)
 }
 
+/* Sidebar.jsx e style end */
 
+/* Backdrop.jsx er style */
 .backdrop{
     position: fixed;
     top: 0;
@@ -53,6 +58,10 @@
     display: block;
 }
 
+/* Backdrop.jsx er style end */
+
+
+/* sidebar e authentication er button er style */
 .authentication-button{
     display: flex;
     justify-content: space-evenly;
@@ -62,3 +71,4 @@
     margin: auto;
     gap: 10px;
 }
+/* sidebar e authentication er button er style */

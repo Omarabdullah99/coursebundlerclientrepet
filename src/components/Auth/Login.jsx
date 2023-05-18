@@ -8,12 +8,12 @@ const Login = () => {
   console.log("login", email);
   console.log("login", password);
   return (
-    <div className="Login w-2/4 mx-auto my-48">
-      <h1 className="text-3xl font-bold mb-5">Welcome to CourseBundler</h1>
+    <div className="Login my-48">
+      <h1 className="text-3xl text-center font-bold mb-5">Welcome to CourseBundler</h1>
 
       <form class="max-w-lg mx-auto">
         <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2" for="username">
+          <label class="block text-gray-700 font-bold mb-2" for="email">
             Email
           </label>
           <input
@@ -21,7 +21,7 @@ const Login = () => {
             required
             id="email"
             value={email}
-            onChange={e => e.target.value}
+            onChange={e => setEmail(e.target.value)}
             type="email"
             placeholder="example@gmial.com"
           />
@@ -36,7 +36,7 @@ const Login = () => {
             required
             id="password"
             value={password}
-            onChange={e => e.target.value}
+            onChange={e => setPassword(e.target.value)}
             type="password"
             placeholder="Enter your password"
           />
@@ -49,6 +49,7 @@ const Login = () => {
           Sign In
         </button>
         <Link
+        to="/forgetpassword"
           class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
           href="#"
         >

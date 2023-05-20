@@ -16,6 +16,7 @@ import Subscribe from "./components/Payments/Subscribe";
 import PaymentFailed from "./components/Payments/PaymentFailed";
 import PaymentSuccess from "./components/Payments/PaymentSuccess";
 import NotFound from "./components/Layout/NotFound/NotFound";
+import CoursePageDetails from "./components/CoursePageDetails/CoursePageDetails";
 
 
 function App() {
@@ -25,6 +26,11 @@ function App() {
     setSidebar((prevState)=> !prevState)
   }
 
+// eitar korone coursedetails e video upor right click korle ar inspace asbe nah
+  window.addEventListener("contextmenu", e =>{
+    e.preventDefault()
+  })
+
   return (
     <Router>
     <Header openSidebar={toggleSidebar} />
@@ -33,6 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/course/:id" element={<CoursePageDetails />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/request" element={<RequestCourse />} />
 

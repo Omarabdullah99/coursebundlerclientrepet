@@ -17,6 +17,7 @@ import PaymentFailed from "./components/Payments/PaymentFailed";
 import PaymentSuccess from "./components/Payments/PaymentSuccess";
 import NotFound from "./components/Layout/NotFound/NotFound";
 import CoursePageDetails from "./components/CoursePageDetails/CoursePageDetails";
+import Profile from "./components/Profile/Profile";
 
 
 function App() {
@@ -27,9 +28,9 @@ function App() {
   }
 
 // eitar korone coursedetails e video upor right click korle ar inspace asbe nah
-  window.addEventListener("contextmenu", e =>{
-    e.preventDefault()
-  })
+  // window.addEventListener("contextmenu", e =>{
+  //   e.preventDefault()
+  // })
 
   return (
     <Router>
@@ -54,6 +55,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
+
+        <Route path="/profile" element={<Profile /> } />
       </Routes>
       <Footer />
     </Router>

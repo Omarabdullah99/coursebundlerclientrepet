@@ -88,7 +88,6 @@ const Register = () => {
         required
         id="chooseAvatar"
         type={"file"}
-        placeholder="Enter your password"
         onChange={changeImageHandler}
       />
     </div>

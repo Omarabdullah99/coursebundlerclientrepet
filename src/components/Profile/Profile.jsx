@@ -38,7 +38,7 @@ const Profile = () => {
   }
   return (
     <Fragment>
-    <div className="profile w-4/5 mx-auto my-48">
+    <div className="profile w-4/5 mx-auto my-24">
       <h1 className="uppercase text-3xl font-bold">Profile</h1>
 
       <div className="profile-main flex flex-col lg:flex-row justify-start items-center gap-5 mt-5">

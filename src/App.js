@@ -20,6 +20,10 @@ import CoursePageDetails from "./components/CoursePageDetails/CoursePageDetails"
 import Profile from "./components/Profile/Profile";
 import UpdateProfile from "./components/Profile/UpdateProfile";
 import ChnagePassword from "./components/Profile/ChnagePassword";
+import Dashboard from "./components/Admin/Dashboard";
+import AllUser from "./components/Admin/AllUser";
+import AddCourses from "./components/Admin/AddCourses";
+import AddSomething from "./components/Admin/AddSomething";
 
 
 function App() {
@@ -61,6 +65,11 @@ function App() {
         <Route path="/profile" element={<Profile /> } />
         <Route path="/updateprofile" element={<UpdateProfile /> } />
         <Route path="/changepassword" element={<ChnagePassword /> } />
+
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/allusers" element={<AllUser />} />
+        <Route path="/admin/addcourses" element={<AddCourses />} />
+        <Route path="/admin/courses" element={<AddSomething />} />
       </Routes>
       <Footer />
     </Router>

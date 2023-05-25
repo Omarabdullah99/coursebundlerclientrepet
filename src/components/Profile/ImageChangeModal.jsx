@@ -37,6 +37,7 @@ const ImageChangeModal = ({isvisible,onClose,imagePrev,setImagePrev,image,setIma
       />
     </div>
     </div>
+    <button>Ok</button>
 
     </div>
     </div>

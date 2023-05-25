@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './Header.css'
 const Sidebar = ({sidebar,closeSidebar}) => {
-    const isAuthenticated=false;
+    const isAuthenticated=true;
     const user={
         role:"admin"
     }
@@ -23,7 +23,7 @@ const Sidebar = ({sidebar,closeSidebar}) => {
 
            <div className='pt-6'>
            {user && user.role === "admin" &&(
-               <Link to="/dashboard" onClick={closeSidebar}> <button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-7 rounded'> Dashboard</button> </Link>
+               <Link to="admin/addcourses" onClick={closeSidebar}> <button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-7 rounded'> Dashboard</button> </Link>
            )}
           </div>
            </div>

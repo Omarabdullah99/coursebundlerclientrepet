@@ -20,10 +20,12 @@ const Adminsider = () => {
       <i className='text-black'> <RiAddCircleFill /> </i>
         <Link to='/admin/addcourses' className={`${location.pathname=== '/admin/addcourses' ? 'text-yellow-500' : 'text-black'} `}>Create Course</Link>
       </li>
+
       <li className="py-2  cursor-pointer flex items-center gap-2">
       <i className='text-black'> <RiEyeFill /> </i>
         <Link to='/admin/courses' className={`${location.pathname=== '/admin/courses' ? 'text-yellow-500' : 'text-black'} `}>Courses</Link>
       </li>
+      
       <li className="py-2  cursor-pointer flex items-center gap-2">
         <i className='text-black'> <RiUser3Fill /> </i>
         <Link to='/admin/allusers' className={`${location.pathname=== '/admin/allusers' ? 'text-yellow-500' : 'text-black'} `}>All Users</Link>

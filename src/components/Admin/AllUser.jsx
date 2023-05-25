@@ -37,62 +37,42 @@ const AllUser = () => {
     }
   ]
   return (
-    <div className="alluser flex  flex-col md:flex-row items-center justify-evenly md:items-center w-4/5 mx-auto">
+    <div className="alluser flex  flex-col lg:flex-row items-center justify-evenly md:items-center w-4/5 mx-auto py-28">
     <Adminsider />
 
     <div className="usertable">
-    <h1>All User list</h1>
+    <h1 className='text-2xl font-bold mb-10'>All User list</h1>
 
-    <div className="overflow-x-auto ">
-    <table className="table w-full">
-      {/* head */}
-      <thead>
-        <tr>
-         <th>Id</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Subscription</th>
-          <th >Action</th>
-        </tr>
-      </thead>
-      <tbody>
-
-      {
-        users.map(item =>(
-          <tr key={item._id}>
-          <td>{item._id}</td>
-
-          <td>
-            <div className="flex items-center space-x-3">
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src={item.imgsrc} alt="Avatar Tailwind CSS Component" />
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">{item.name} </div>
-              </div>
-            </div>
-          </td>
-
-          <td>{item.email}</td>
-          <td>{item.role}</td>
-          <td>{item.subscription.status=== "active" ? "Active": "Not Active"}</td>
-          <td className='flex items-center text-blue-500 text-2xl'>
-         
-            <button className="btn bg-transparent border-none hover:bg-transparent text-blue-500  btn-xs ">Change role</button>
-            <button> <i> <RiDeleteBin7Fill /> </i></button>
-          </td>
-        </tr>
-        ))
-      }
-       
-      </tbody>
-      
-      
-    </table>
-  </div>
+    <div class="overflow-x-auto w-full">
+  <table class="table-auto border-none">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">ID</th>
+        <th class="px-4 py-2">NAME </th>
+        <th class="px-4 py-2">EMAIL</th>
+        <th class="px-4 py-2">ROLE</th>
+        <th class="px-4 py-2">STATUS</th>
+        <th class="px-4 py-2">BUTTON</th>
+        
+      </tr>
+    </thead>
+    <tbody >
+     {
+      users.map(item =>(
+        <tr key={item._id}>
+        <td class=" px-4 py-2">{item._id}</td>
+        <td class=" px-4 py-2">{item.name} </td>
+        <td class=" px-4 py-2"> {item.email} </td>
+        <td class=" px-4 py-2"> {item.role} </td>
+        <td class=" px-4 py-2"> {item.subscription && item.subscription.status === 'active'? 'Active': 'Not Active'} </td>
+        <td class=" px-4 py-2"> <button>Change Role</button> </td>
+      </tr>
+      ))
+     }
+     
+    </tbody>
+  </table>
+</div>
 
     </div>
     

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
 import Adminsider from './Adminsider'
 import { RiDeleteBin7Fill } from 'react-icons/ri'
+import CourseModel from './CourseModel'
 
 const AddSomething = () => {
+  //modal work
+  const [showModal, setShowModal]=useState(false)
   const users=[
     {
       _id:"ajlkdjjkljasdlk",
@@ -30,7 +33,14 @@ const AddSomething = () => {
       lectures:12,
     }
   ]
+
+  const courseDetailsHandler=(courseId,title)=>{
+
+    setShowModal(true)
+    console.log(courseId,title)
+  }
   return (
+    <Fragment>
     <div className='courses flex  flex-col lg:flex-row items-center justify-evenly md:items-center w-4/5 mx-auto py-28'>
     <Adminsider />
     <div className="cousertable">
@@ -66,7 +76,7 @@ const AddSomething = () => {
 
           <td class=" px-4 py-2"> {item.lectures} </td>
 
-          <td class=" px-4 py-2"> <button>View Lecture</button> </td>
+          <td class=" px-4 py-2"> <button  onClick={()=>courseDetailsHandler(item._id, item.title) }>View Lecture</button> </td>
           <td class=" px-4 py-2"> <i> <RiDeleteBin7Fill /> </i> </td>
           
           </tr>
@@ -77,10 +87,12 @@ const AddSomething = () => {
     </table>
   </div>
 
-
     </div>
 
     </div>
+
+    <CourseModel isvisible={showModal} onClose={()=>setShowModal(false)}  />
+    </Fragment>
   )
 }
 

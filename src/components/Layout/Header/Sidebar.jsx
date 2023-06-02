@@ -1,11 +1,20 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './Header.css'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../redux/action/user'
 const Sidebar = ({sidebar,closeSidebar, isAuthenticated=false,user}) => {
     // const isAuthenticated=false;
     // const user={
     //     role:"admin"
     // }
+
+    //logout work
+    const dispatch=useDispatch()
+    const logoutHandler=()=>{
+      closeSidebar()
+      dispatch(logout())
+    }
   return (
    <div className={sidebar?"sidebar sidebar-open": "sidebar" }>
       <Link to='/' onClick={closeSidebar}><li>Home</li></Link>
@@ -19,7 +28,7 @@ const Sidebar = ({sidebar,closeSidebar, isAuthenticated=false,user}) => {
             <>
            <div>
            <Link to="/profile" onClick={closeSidebar}> <button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-3 rounded mr-2'> Profile</button> </Link>
-           <Link to="/Logout" onClick={closeSidebar}> <button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-3 rounded'> Logout</button> </Link>
+           <Link to="/Logout" onClick={logoutHandler}> <button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-3 rounded'> Logout</button> </Link>
 
            <div className='pt-6'>
            {user && user.role === "admin" &&(

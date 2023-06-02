@@ -43,3 +43,24 @@ export const loadUser=()=>async(dispatch)=>{
         
     }
 }
+
+//logout function
+
+export const logout=()=>async(dispatch)=>{
+    try {
+        dispatch({type:"logOutRequest"})
+
+        const {data}= await axios.get(`${server}/logout`, {
+            
+            withCredentials:true //cookies jonno eita true dewa lagbe
+        })
+
+        console.log("logout",data)
+
+        dispatch({type:"logOutSuccess",  payload:data.message})
+        
+    } catch (error) {
+        dispatch({type:'logOutFail',payload:error.response.data.message})
+        
+    }
+}

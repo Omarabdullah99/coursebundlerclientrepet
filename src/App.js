@@ -30,6 +30,9 @@ import {useDispatch} from 'react-redux'
 import toast,{Toaster} from 'react-hot-toast'
 import { loadUser } from "./redux/action/user";
 
+//redirect and protected route
+import {ProtectedRoute} from 'protected-route-react'
+
 
 function App() {
   const [sidebar,setSidebar]= useState(false)
@@ -89,12 +92,12 @@ function App() {
         <Route path="/paymentfailed" element={<PaymentFailed />} />
 
        
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={ <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"><Login /></ProtectedRoute> } />
         <Route path="/register" element={<Register />} />
         <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
 
-        <Route path="/profile" element={<Profile /> } />
+        <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Profile /> </ProtectedRoute> } />
         <Route path="/updateprofile" element={<UpdateProfile /> } />
         <Route path="/changepassword" element={<ChnagePassword /> } />
 

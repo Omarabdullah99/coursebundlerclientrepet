@@ -5,10 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import 'tailwindcss/tailwind.css'
 
+import { Provider as ReduxProvider} from 'react-redux'
+import store from './redux/store';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ReduxProvider store={store}>
     <App />
+    </ReduxProvider>
   </React.StrictMode>
 );
 

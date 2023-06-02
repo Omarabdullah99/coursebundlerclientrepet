@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import {useDispatch} from 'react-redux'
+import { login } from "../../redux/action/user";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log("login", email);
-  console.log("login", password);
+  const dispatch=useDispatch()
+
+  const submitHandler=(e)=>{
+
+    e.preventDefault() //page reload na hower jonno eita
+    dispatch(login(email,password))
+
+  }
+
+  // console.log("login", email);
+  // console.log("login", password);
   return (
     <div className="Login my-48">
       <h1 className="text-3xl text-center font-bold mb-5">Welcome to CourseBundler</h1>
 
-      <form class="max-w-lg mx-auto">
+      <form onSubmit={submitHandler} class="max-w-lg mx-auto">
         <div class="mb-4">
           <label class="block text-gray-700 font-bold mb-2" for="email">
             Email

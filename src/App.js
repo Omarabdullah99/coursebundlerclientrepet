@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {BrowserRouter as Router, Route,Routes} from "react-router-dom"
 import Home from "./components/Home/Home";
 import Header from "./components/Layout/Header/Header";
@@ -24,6 +24,11 @@ import Dashboard from "./components/Admin/Dashboard";
 import AllUser from "./components/Admin/AllUser";
 import AddCourses from "./components/Admin/AddCourses";
 import AddSomething from "./components/Admin/AddSomething";
+import { useSelector } from "react-redux";
+import {useDispatch} from 'react-redux'
+//Toaster er work
+import toast,{Toaster} from 'react-hot-toast'
+import { loadUser } from "./redux/action/user";
 
 
 function App() {
@@ -32,6 +37,33 @@ function App() {
   const toggleSidebar=()=>{
     setSidebar((prevState)=> !prevState)
   }
+
+  //login er work
+  const {isAuthenticated,user,message,error}=useSelector(state => state.user)
+  const dispatch=useDispatch()
+
+  //toaster er kaj login e
+  useEffect(()=>{
+    if(error){
+      toast.error(error)
+      dispatch({type:'clearError'})
+    }
+
+    if(message){
+      toast.success(message)
+      dispatch({type:'clearMessage'})
+
+    }
+
+  }, [dispatch,error,message])
+
+  //getMyprofile and reload dewar por jate login chole na jay tar jonno
+  useEffect(()=>{
+    dispatch(loadUser())
+
+  }, [dispatch])
+
+
 
 // eitar korone coursedetails e video upor right click korle ar inspace asbe nah
   // window.addEventListener("contextmenu", e =>{
@@ -42,7 +74,7 @@ function App() {
     <Router>
     <Header openSidebar={toggleSidebar} />
     <Backdrop sidebar={sidebar} closeSidebar={toggleSidebar} />
-    <Sidebar sidebar={sidebar} closeSidebar={toggleSidebar}/>
+    <Sidebar sidebar={sidebar} closeSidebar={toggleSidebar} isAuthenticated={isAuthenticated} user={user}  />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
@@ -72,6 +104,8 @@ function App() {
         <Route path="/admin/courses" element={<AddSomething />} />
       </Routes>
       <Footer />
+
+      <Toaster />
     </Router>
   );
 }

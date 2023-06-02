@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './Header.css'
-const Sidebar = ({sidebar,closeSidebar}) => {
-    const isAuthenticated=true;
-    const user={
-        role:"admin"
-    }
+const Sidebar = ({sidebar,closeSidebar, isAuthenticated=false,user}) => {
+    // const isAuthenticated=false;
+    // const user={
+    //     role:"admin"
+    // }
   return (
    <div className={sidebar?"sidebar sidebar-open": "sidebar" }>
       <Link to='/' onClick={closeSidebar}><li>Home</li></Link>

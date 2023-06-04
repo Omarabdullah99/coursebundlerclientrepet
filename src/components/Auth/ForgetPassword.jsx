@@ -1,12 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { forgetPassword } from '../../redux/action/profile'
+import { toast } from 'react-hot-toast'
 
 const ForgetPassword = () => {
     const [email,setEmail]=useState("")
+    //forget password
+    const {message,error}=useSelector(state => state.profile)
+    const dispatch =useDispatch()
+    const submitHandler=e =>{
+      e.preventDefault();
+      dispatch(forgetPassword(email))
+    }
+
+    useEffect(()=>{
+      if(error){
+        toast.error(error)
+        dispatch({type:'clearError'})
+      }
+      if(message){
+        toast.success(message)
+        dispatch({type:'clearMessage'})
+      }
+
+    },[dispatch,error,message])
   return (
     <div className="forgetpassword my-48">
     <h1 className='text-center text-3xl uppercase font-bold mb-4'> Forget Password</h1>
-    <form class="max-w-lg mx-auto">
+    <form onSubmit={submitHandler} class="max-w-lg mx-auto">
     <div class="mb-4">
           <label class="block text-gray-700 font-bold mb-2" for="email">
             Email

@@ -64,3 +64,26 @@ export const logout=()=>async(dispatch)=>{
         
     }
 }
+
+//register action
+
+export const register=(formdata)=>async(dispatch)=>{
+    try {
+        dispatch({type:"registerRequest"})
+
+        const {data}= await axios.post(`${server}/register`, formdata,{
+            headers:{
+                "Content-Type":'multipart/form-data' //register e eita dite hobe
+            },
+            withCredentials:true //cookies jonno eita true dewa lagbe
+        })
+
+        console.log("registerdata",data)
+
+        dispatch({type:"registerSuccess",  payload:data})
+        
+    } catch (error) {
+        dispatch({type:'registerFail',payload:error.response.data.message})
+        
+    }
+}

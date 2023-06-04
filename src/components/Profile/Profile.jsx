@@ -3,35 +3,36 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import ImageChangeModal from "./ImageChangeModal";
 
-const Profile = () => {
+const Profile = ({user}) => {
+  console.log("profle", user)
   //modal work
   const [showModal, setShowModal]=useState(false)
   const [imagePrev, setImagePrev]=useState("")
   const [image, setImage]=useState("")
 
-  const user = {
-    name: "Omar Abdullah",
-    email: "omarabdullah917303@gmail.com",
-    createAd: String(new Date().toISOString()),
-    role: "user",
-    subscription: {
-      status: undefined,
-    },
-    playlist:[
-        {
-            course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
-        },
-        {
-            course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
-        },
-        {
-            course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
-        },
-        {
-            course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
-        }
-    ]
-  };
+  // const user = {
+  //   name: "Omar Abdullah",
+  //   email: "omarabdullah917303@gmail.com",
+  //   createAd: String(new Date().toISOString()),
+  //   role: "user",
+  //   subscription: {
+  //     status: undefined,
+  //   },
+  //   playlist:[
+  //       {
+  //           course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
+  //       },
+  //       {
+  //           course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
+  //       },
+  //       {
+  //           course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
+  //       },
+  //       {
+  //           course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
+  //       }
+  //   ]
+  // };
 
   const removeFromPlaylistHandler=id=>{
     console.log("removeplaylist",  id)
@@ -44,7 +45,7 @@ const Profile = () => {
       <div className="profile-main flex flex-col lg:flex-row justify-start items-center gap-5 mt-5">
         <div className="avaterprofile flex flex-col justify-center items-center">
           <div className="rounded-full bg-gray-300 w-40 h-40 ">
-            <img className="rounded-full h-40 w-40" src={imagePrev} alt="" />
+            <img className="rounded-full h-40 w-40" src={user.avatar.url} alt="" />
           </div>
           <button className="bg-transparent text-yellow-500 font-bold mt-3" onClick={()=>setShowModal(true)}>
             Change Photo
@@ -63,14 +64,14 @@ const Profile = () => {
           <p>
             {" "}
             <span className="font-bold">Create Ad</span>:
-            {user.createAd.split("T")[0]}{" "}
+            {user.createdAt.split("T")[0]}{" "}
           </p>
 
           {user.role !== "admin" && (
             <div className="flex flex-row gap-3 items-center mt-3">
               <p>Subscription:</p>
 
-              {user.subscription.status === "active" ? (
+              {user.subscription && user.subscription.status === "active" ? (
                 <button className="bg-yellow-500 text-white font-bold py-2 px-4 rounded">
                   Cancle SUbscription
                 </button>

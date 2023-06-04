@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { register } from "../../redux/action/user";
 
 const Register = () => {
   const [name,setName]=useState("")
@@ -21,11 +23,25 @@ const Register = () => {
   
     }
   }
+
+  //signin
+  const dispatch=useDispatch()
+  const submitHandler=(e)=>{
+    e.preventDefault();
+    const myForm= new FormData()
+    myForm.append("name", name)
+    myForm.append("email", email)
+    myForm.append("password",password)
+    myForm.append('file', image)
+    dispatch(register(myForm))
+
+  }
+
   return (
     <div className="Login my-48">
     <h1 className="text-3xl text-center font-bold mb-5 uppercase">Registration</h1>
 
-    <form class="max-w-lg mx-auto">
+    <form onSubmit={submitHandler} class="max-w-lg mx-auto">
 
     <div className="flex items-center justify-center ">
     <div className="rounded-full bg-gray-300 w-40 h-40 flex items-center justify-center">

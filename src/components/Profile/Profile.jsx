@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { RiDeleteBin7Fill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ImageChangeModal from "./ImageChangeModal";
+import { useDispatch } from "react-redux";
+import { updateProfilePicture } from "../../redux/action/profile";
+import { loadUser } from "../../redux/action/user";
 
 const Profile = ({user}) => {
   console.log("profle", user)
@@ -10,29 +13,20 @@ const Profile = ({user}) => {
   const [imagePrev, setImagePrev]=useState("")
   const [image, setImage]=useState("")
 
-  // const user = {
-  //   name: "Omar Abdullah",
-  //   email: "omarabdullah917303@gmail.com",
-  //   createAd: String(new Date().toISOString()),
-  //   role: "user",
-  //   subscription: {
-  //     status: undefined,
-  //   },
-  //   playlist:[
-  //       {
-  //           course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
-  //       },
-  //       {
-  //           course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
-  //       },
-  //       {
-  //           course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
-  //       },
-  //       {
-  //           course:"sadasd", poster: "https://st2.depositphotos.com/1350793/8441/i/600/depositphotos_84416316-stock-photo-hand-pointing-to-online-course.jpg"
-  //       }
-  //   ]
-  // };
+  const navigate=useNavigate()
+  //update prolie picture
+  const dispathc=useDispatch()
+  const changeImageSubmitHandler=async (e,image)=>{
+    e.preventDefault();
+    const myForm= new FormData()
+    myForm.append('file',image) //"file sure dewa lagbe"
+    await dispathc(updateProfilePicture(myForm))
+
+    dispathc(loadUser()) //ertar karone refersh sara change hobe
+    navigate("/profile")
+
+  }
+  
 
   const removeFromPlaylistHandler=id=>{
     console.log("removeplaylist",  id)
@@ -134,7 +128,7 @@ const Profile = ({user}) => {
 
     </div>
 
-    <ImageChangeModal isvisible={showModal} onClose={()=>setShowModal(false)} imagePrev={imagePrev} setImagePrev={setImagePrev} image={image} setImage={setImage}   />
+    <ImageChangeModal isvisible={showModal} onClose={()=>setShowModal(false)} imagePrev={imagePrev} setImagePrev={setImagePrev} image={image} setImage={setImage} changeImageSubmitHandler={changeImageSubmitHandler}   />
 
     </Fragment>
   );

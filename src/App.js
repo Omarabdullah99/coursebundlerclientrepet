@@ -104,7 +104,7 @@ function App() {
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
     
             <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Profile user={user} /> </ProtectedRoute> } />
-            <Route path="/updateprofile" element={<ProtectedRoute isAuthenticated={isAuthenticated}><UpdateProfile /></ProtectedRoute> } />
+            <Route path="/updateprofile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><UpdateProfile user={user} /></ProtectedRoute> } />
             <Route path="/changepassword" element={<ProtectedRoute isAuthenticated={isAuthenticated}><ChnagePassword /></ProtectedRoute> } />
     
             <Route path="/admin/dashboard" element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}><Dashboard /></ProtectedRoute>} />

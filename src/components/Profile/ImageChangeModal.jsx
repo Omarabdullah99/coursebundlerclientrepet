@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ImageChangeModal = ({isvisible,onClose,imagePrev,setImagePrev,image,setImage}) => {
+const ImageChangeModal = ({isvisible,onClose,imagePrev,setImagePrev,image,setImage,changeImageSubmitHandler}) => {
     if(!isvisible) return null
     const changeImageHandler=(e)=>{
         const file=e.target.files[0]
@@ -22,6 +22,7 @@ const ImageChangeModal = ({isvisible,onClose,imagePrev,setImagePrev,image,setIma
     <div className="content bg-white p-2 rounded ">
     <h1 className='text-3xl text-yellow-500'>Modal</h1>
 
+    <form onSubmit={(e)=> changeImageSubmitHandler(e,image)} action="">
     <div class="mb-6">
       <label class="block text-gray-700 font-bold mb-2" for="chooseAvatar">
         Chose Avater
@@ -36,8 +37,15 @@ const ImageChangeModal = ({isvisible,onClose,imagePrev,setImagePrev,image,setIma
         
       />
     </div>
+    <button
+        class="bg-yellow-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+        type="submit"
+      >
+        Update Picture
+      </button>
+    </form>
     </div>
-    <button>Ok</button>
+    
 
     </div>
     </div>

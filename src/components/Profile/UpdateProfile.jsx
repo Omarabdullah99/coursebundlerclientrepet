@@ -18,8 +18,8 @@ const UpdateProfile = ({user}) => {
     const submitHandler=async e=>{
       e.preventDefault();
      await dispatch(updateProfile(name,email))
-     dispatch(loadUser())
-     navigate("/profile")
+     dispatch(loadUser()) //ertar karone refersh sara change hobe
+     
       
     }
 
@@ -33,6 +33,7 @@ const UpdateProfile = ({user}) => {
       if(message){
         toast.success(message)
         dispatch({type:'clearMessage'})
+        navigate("/profile")
       }
 
     },[dispatch,error,message])

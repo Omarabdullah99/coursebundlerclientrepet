@@ -19,8 +19,8 @@ const ChnagePassword = () => {
     const submitHandler=e=>{
       e.preventDefault();
       dispatch(changePassword(oldPassword,newPassword))
-      dispatch(loadUser())
-      navigate("/profile")
+      dispatch(loadUser()) //ertar karone refersh sara change hobe
+      
     }
 
     //change password e message show
@@ -33,6 +33,7 @@ const ChnagePassword = () => {
       if(message){
         toast.success(message)
         dispatch({type:'clearMessage'})
+        navigate("/profile")
       }
 
     }, [dispatch,error,message])

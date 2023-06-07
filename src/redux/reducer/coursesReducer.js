@@ -13,6 +13,24 @@ export const coursesReducer=createReducer({courses:[]},{
         state.loading = false;
         state.error = action.payload;
       },
+      //get all courses end
+
+      //add to playlist
+      addToPlaylistRequest: state => {
+        state.loading = true;
+      },
+      addToPlaylistSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+      },
+      addToPlaylistFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      },
+
+      //remove from playlist-> profile reducer e ache
+
+
 
 
       clearError: state => {

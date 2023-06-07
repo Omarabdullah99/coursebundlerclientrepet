@@ -2,8 +2,8 @@ import React, { Fragment, useState } from "react";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import ImageChangeModal from "./ImageChangeModal";
-import { useDispatch } from "react-redux";
-import { updateProfilePicture } from "../../redux/action/profile";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromPlaylist, updateProfilePicture } from "../../redux/action/profile";
 import { loadUser } from "../../redux/action/user";
 
 const Profile = ({user}) => {
@@ -27,8 +27,12 @@ const Profile = ({user}) => {
 
   }
   
+  //removeFromPlayList
+  const{loading,message,error}=useSelector(state => state.profile)
+  const removeFromPlaylistHandler=async id=>{
+   await dispathc(removeFromPlaylist(id))
+   dispathc(loadUser())
 
-  const removeFromPlaylistHandler=id=>{
     console.log("removeplaylist",  id)
   }
   return (

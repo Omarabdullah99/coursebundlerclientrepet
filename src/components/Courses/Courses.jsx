@@ -4,6 +4,9 @@ import courseImg from '../../assests/images/courses.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCourses } from '../../redux/action/courses'
 import { toast } from 'react-hot-toast'
+import { addToPlaylist } from '../../redux/action/profile'
+import { loadUser } from '../../redux/action/user'
+import Loader from '../Layout/Loader/Loader'
 
 
 const Allcourse = () => {
@@ -64,20 +67,32 @@ const Allcourse = () => {
 
   //get all courses
   const dispatch= useDispatch()
-  const {loader,courses,error}=useSelector(state => state.course)
+  const {loading,courses,error,message}=useSelector(state => state.course)
 
+  
+  //addToPlayList
+  const addToPlayListHandler= async courseId=>{
+    await dispatch(addToPlaylist(courseId))
+    dispatch(loadUser())
+  }
+  
   useEffect(()=>{
-    dispatch(getAllCourses(category,keyword))
+    dispatch(getAllCourses(category,keyword)) //getAllCourses
 
     if(error){
       toast.error(error)
       dispatch({type:'clearError'})
     }
 
-  },[category,keyword,dispatch,error ])
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+
+  },[category,keyword,dispatch,error,message ])
 
   console.log("courses",courses)
-  
+
 
   return (
     <div className="courses w-8/12 m-auto mt-10">
@@ -103,7 +118,9 @@ const Allcourse = () => {
           <p><span className='font-bold text-lg'>LectureCount</span>: {item.numOfVideos} </p>
           <div className="coursesbutton flex flex-row gap-3 ">
           <button className=' flex-shrink-0 bg-yellow-500 text-black font-bold  rounded px-2 py-2 mb-3'>Watch Now</button>
-          <button className=' flex-shrink-0 bg-transparent text-yellow-500 font-bold  rounded px-2 py-2 mb-3'>Add To Play List</button>
+          {
+             <button onClick={()=>addToPlayListHandler(item._id)} className=' flex-shrink-0 bg-transparent text-yellow-500 font-bold  rounded px-2 py-2 mb-3'>Add To Play List</button>
+          }
           </div>
 
           </div>

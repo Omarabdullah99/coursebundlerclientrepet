@@ -2,43 +2,47 @@ import React, { Fragment, useState } from 'react'
 import Adminsider from './Adminsider'
 import { RiDeleteBin7Fill } from 'react-icons/ri'
 import CourseModel from './CourseModel'
+import { useSelector } from 'react-redux'
 
 const AddSomething = () => {
   //modal work
   const [showModal, setShowModal]=useState(false)
-  const courses=[
-    {
-      _id:"ajlkdjjkljasdlk",
-      poster:{
-        url:"https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg"
-      },
-      title:"React Course",
-      category:"Web Development",
-      creator:"Omar Abdullah",
-      lectures:2,
+  // const courses=[
+  //   {
+  //     _id:"ajlkdjjkljasdlk",
+  //     poster:{
+  //       url:"https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg"
+  //     },
+  //     title:"React Course",
+  //     category:"Web Development",
+  //     creator:"Omar Abdullah",
+  //     lectures:2,
       
-    },
-    {
-      _id:"ajlkkljasdlk",
-      poster:{
-        url:"https://www.beyondblue.org.au/images/default-source/2.get-help/newaccess/new-access-for-small-business-owners.svg?sfvrsn=648933d1_4"
-      },
-      title:"React Course",
-      category:"App Development",
-      creator:"Omar Abdullah",
-      lectures:9,
-    },
-    {
-      _id:"ajlkdjjkljasd",
-      poster:{
-        url:"https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg"
-      },
-      title:"React Course",
-      category:"Game Development",
-      creator:"Omar Abdullah",
-      lectures:12,
-    }
-  ]
+  //   },
+  //   {
+  //     _id:"ajlkkljasdlk",
+  //     poster:{
+  //       url:"https://www.beyondblue.org.au/images/default-source/2.get-help/newaccess/new-access-for-small-business-owners.svg?sfvrsn=648933d1_4"
+  //     },
+  //     title:"React Course",
+  //     category:"App Development",
+  //     creator:"Omar Abdullah",
+  //     lectures:9,
+  //   },
+  //   {
+  //     _id:"ajlkdjjkljasd",
+  //     poster:{
+  //       url:"https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg"
+  //     },
+  //     title:"React Course",
+  //     category:"Game Development",
+  //     creator:"Omar Abdullah",
+  //     lectures:12,
+  //   }
+  // ]
+
+  const {courses}=useSelector(state => state.course)
+  console.log("addsomething",courses)
 
   const courseDetailsHandler=(courseId,title)=>{
 

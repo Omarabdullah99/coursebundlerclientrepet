@@ -1,5 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Adminsider from './Adminsider'
+import { useDispatch, useSelector } from 'react-redux';
+import { createCourse } from '../../redux/action/admin';
+import { toast } from 'react-hot-toast';
+
+
 
 const AddCourses = () => {
   const [title, setTitle] = useState('');
@@ -9,7 +14,11 @@ const AddCourses = () => {
   const [image, setImage] = useState('');
   const [imagePrev, setImagePrev] = useState('');
 
-  console.log(title,description,createdBy,category)
+  const dispatch=useDispatch()
+  const {loading,error,message} =useSelector(state => state.admin)
+
+  // console.log(title,description,createdBy,category)
+
 
   const categories = [
     'Web development',
@@ -35,13 +44,39 @@ const AddCourses = () => {
     }
   }
 
+  //create Course
+  const submitHandler=(e)=>{
+    e.preventDefault();
+    //   title,description,category,createdBy,file -- ei 4ta must formdata pathano lagbe
+    const myForm= new FormData()
+    myForm.append("title", title)
+    myForm.append("description", description)
+    myForm.append("category",category)
+    myForm.append("createdBy",createdBy)
+    myForm.append('file', image)
+    dispatch(createCourse(myForm))
+  }
+
+  useEffect(()=>{
+    if(error){
+      toast.error(error)
+      dispatch({type:'clearError'})
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+
+  },[dispatch,error,message])
+
   return (
     <div className='flex  flex-col md:flex-row items-center justify-evenly md:items-center w-4/5 mx-auto'>
     <Adminsider />
     <div className="addcourses">
     <h1 className='text-2xl font-bold py-5'>Create Courese</h1>
 
-    <form class="max-w-lg mx-auto">
+    <form onSubmit={submitHandler} class="max-w-lg mx-auto">
     <div class="mb-6">
     <input
       class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -78,17 +113,7 @@ const AddCourses = () => {
     />
   </div>
 
-  <div class="mb-6">
-    <input
-      class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      required
-      id="createdBy"
-      value={createdBy}
-      onChange={e => setCreatedBy(e.target.value)}
-      type="text"
-      placeholder="creator name"
-    />
-  </div>
+ 
 
   <div className='md-6'>
 

@@ -33,6 +33,7 @@ import { loadUser } from "./redux/action/user";
 //redirect and protected route
 import {ProtectedRoute} from 'protected-route-react'
 import Loader from "./components/Layout/Loader/Loader";
+import ViewLecture from "./components/Admin/ViewLecture";
 
 
 function App() {
@@ -111,6 +112,7 @@ function App() {
             <Route path="/admin/allusers" element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}><AllUser /></ProtectedRoute> } />
             <Route path="/admin/addcourses" element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}><AddCourses /></ProtectedRoute>} />
             <Route path="/admin/courses" element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}><AddSomething /></ProtectedRoute>} />
+            <Route path="admin/viewlecture/:id" element={<ProtectedRoute adminRoute={true} isAuthenticated={isAuthenticated} isAdmin={user && user.role === 'admin'}><ViewLecture /></ProtectedRoute>} />
           </Routes>
           <Footer />
     

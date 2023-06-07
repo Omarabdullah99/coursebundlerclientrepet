@@ -1,53 +1,31 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Adminsider from './Adminsider'
 import { RiDeleteBin7Fill } from 'react-icons/ri'
 import CourseModel from './CourseModel'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllCourses } from '../../redux/action/courses'
+import { Link } from 'react-router-dom'
+
 
 const AddSomething = () => {
   //modal work
   const [showModal, setShowModal]=useState(false)
-  // const courses=[
-  //   {
-  //     _id:"ajlkdjjkljasdlk",
-  //     poster:{
-  //       url:"https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg"
-  //     },
-  //     title:"React Course",
-  //     category:"Web Development",
-  //     creator:"Omar Abdullah",
-  //     lectures:2,
-      
-  //   },
-  //   {
-  //     _id:"ajlkkljasdlk",
-  //     poster:{
-  //       url:"https://www.beyondblue.org.au/images/default-source/2.get-help/newaccess/new-access-for-small-business-owners.svg?sfvrsn=648933d1_4"
-  //     },
-  //     title:"React Course",
-  //     category:"App Development",
-  //     creator:"Omar Abdullah",
-  //     lectures:9,
-  //   },
-  //   {
-  //     _id:"ajlkdjjkljasd",
-  //     poster:{
-  //       url:"https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg"
-  //     },
-  //     title:"React Course",
-  //     category:"Game Development",
-  //     creator:"Omar Abdullah",
-  //     lectures:12,
-  //   }
-  // ]
 
-  const {courses}=useSelector(state => state.course)
-  console.log("addsomething",courses)
+  // onClick={()=>courseDetailsHandler(item._id, item.title) }
+  
+ const {courses}=useSelector(state => state.course)
+ const dispatch=useDispatch()
+ useEffect(()=>{
+  dispatch(getAllCourses())
 
-  const courseDetailsHandler=(courseId,title)=>{
 
-    setShowModal(true)
-    console.log(courseId,title)
+ },[dispatch])
+
+ console.log(courses)
+
+
+  const courseDetailsHandler=(courseId)=>{
+    console.log(courseId)
   }
 
   const deleteHandler=(courseId)=>{
@@ -101,7 +79,7 @@ const AddSomething = () => {
 
           <td class=" px-4 py-2"> {item.lectures} </td>
 
-          <td class=" px-4 py-2"> <button  onClick={()=>courseDetailsHandler(item._id, item.title) }>View Lecture</button> </td>
+          <td class=" px-4 py-2"> <Link to={`/admin/viewlecture/${item._id}`}> <button>View Lecture</button></Link> </td>
           <td class=" px-4 py-2"> <i> <RiDeleteBin7Fill onClick={()=>deleteHandler(item._id)} /> </i> </td>
           
           </tr>

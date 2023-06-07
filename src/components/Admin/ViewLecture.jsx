@@ -39,13 +39,13 @@ const ViewLecture = () => {
   return (
     <div className="main flex flex-col md:flex-row gap-6 w-4/5 mx-auto ">
 
-   <div className="left w-full md:w-9/12">
+   <div className="left w-full md:w-9/12 grid grid-cols-1 md:grid-cols-2">
    
    {
    lectures.length ? lectures.map((item,i)=>(
-        <div key={i} className='grid grid-cols-1 md:grid-cols-2'>
+        <div key={i} className=''>
         
-        <div className="div">
+        
         
         <p>{item.title} </p>
         <p>{item.description}</p>
@@ -57,7 +57,7 @@ const ViewLecture = () => {
     disableRemotePlayback 
         ></video>
         <button>Delete</button>
-        </div>
+        
        
         
         </div>

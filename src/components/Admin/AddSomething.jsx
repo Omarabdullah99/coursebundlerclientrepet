@@ -5,6 +5,10 @@ import CourseModel from './CourseModel'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCourses } from '../../redux/action/courses'
 import { Link } from 'react-router-dom'
+import { deleteCourse } from '../../redux/action/admin'
+import { loadUser } from '../../redux/action/user'
+import toast from 'react-hot-toast';
+import Loader from '../Layout/Loader/Loader'
 
 
 const AddSomething = () => {
@@ -12,34 +16,44 @@ const AddSomething = () => {
   const [showModal, setShowModal]=useState(false)
 
   // onClick={()=>courseDetailsHandler(item._id, item.title) }
+
+  
+//deleteCourse
+const {loading, error, message}=useSelector(state => state.admin)
+const deleteHandler=(courseId)=>{
+  dispatch(deleteCourse(courseId))
+  dispatch(loadUser())
+}
   
  const {courses}=useSelector(state => state.course)
  const dispatch=useDispatch()
  useEffect(()=>{
+
+  if (error) {
+    toast.error(error);
+    dispatch({ type: 'clearError' });
+  }
+
+  if (message) {
+    toast.success(message);
+    dispatch({ type: 'clearMessage' });
+  }
   dispatch(getAllCourses())
 
 
- },[dispatch])
+ },[dispatch,error,message])
 
  console.log(courses)
 
 
-  const courseDetailsHandler=(courseId)=>{
-    console.log(courseId)
-  }
+  // const deleteLectureButtonHandler=(courseId,lectureId)=>{
+  //   console.log(courseId, lectureId)
 
-  const deleteHandler=(courseId)=>{
-    console.log(courseId)
-  }
+  // }
 
-  const deleteLectureButtonHandler=(courseId,lectureId)=>{
-    console.log(courseId, lectureId)
-
-  }
-
-  const addLectureHandler=(e,courseId,title,description,video)=>{
-    e.preventDefault()
-  }
+  // const addLectureHandler=(e,courseId,title,description,video)=>{
+  //   e.preventDefault()
+  // }
 
   
   return (
@@ -80,7 +94,7 @@ const AddSomething = () => {
           <td class=" px-4 py-2"> {item.lectures} </td>
 
           <td class=" px-4 py-2"> <Link to={`/admin/viewlecture/${item._id}`}> <button>View Lecture</button></Link> </td>
-          <td class=" px-4 py-2"> <i> <RiDeleteBin7Fill onClick={()=>deleteHandler(item._id)} /> </i> </td>
+          <td class=" px-4 py-2"> {loading ? <Loader /> : <button onClick={()=>deleteHandler(item._id)} ><i> <RiDeleteBin7Fill  /> </i></button>} </td>
           
           </tr>
         ))
@@ -94,11 +108,7 @@ const AddSomething = () => {
 
     </div>
 
-    <CourseModel isvisible={showModal} onClose={()=>setShowModal(false)}
-    id={"jfkja"} 
-    deleteButtonHandler={deleteLectureButtonHandler} 
-    courseTitle="React Course" 
-    addLectureHandler={addLectureHandler} />
+   
     </Fragment>
   )
 }

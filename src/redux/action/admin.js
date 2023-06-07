@@ -1,6 +1,7 @@
 import axios from "axios";
 import { server } from "../store";
 
+//create Course
 export const createCourse =(formData) =>async dispatch => {
     try {
 
@@ -26,6 +27,26 @@ export const createCourse =(formData) =>async dispatch => {
     } catch (error) {
       dispatch({
         type: 'createCourseFail',
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+  //delete Course
+
+  export const deleteCourse = id => async dispatch => {
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      dispatch({ type: 'deleteCourseRequest' });
+  
+      const { data } = await axios.delete(`${server}/course/${id}`, config);
+  
+      dispatch({ type: 'deleteCourseSuccess', payload: data.message });
+    } catch (error) {
+      dispatch({
+        type: 'deleteCourseFail',
         payload: error.response.data.message,
       });
     }

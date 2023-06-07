@@ -3,6 +3,7 @@ import Adminsider from './Adminsider'
 import { useDispatch, useSelector } from 'react-redux';
 import { createCourse } from '../../redux/action/admin';
 import { toast } from 'react-hot-toast';
+import Loader from '../Layout/Loader/Loader';
 
 
 
@@ -152,12 +153,14 @@ const AddCourses = () => {
 
 
 
-  <button
-  class="w-full mt-3 bg-yellow-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-10 "
-  type="submit"
->
-  Submit
-</button>
+  {
+    loading ? <Loader /> : <button
+    class="w-full mt-3 bg-yellow-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-10 "
+    type="submit"
+  >
+    Submit
+  </button>
+  }
 
 
     

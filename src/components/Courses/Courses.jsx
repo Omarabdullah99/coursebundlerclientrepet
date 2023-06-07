@@ -96,7 +96,7 @@ const Allcourse = () => {
 
   return (
     <div className="courses w-8/12 m-auto mt-10">
-      <h1 className='text-5xl font-bold mb-4'>All Courses</h1>
+      <h1 className='text-xl md:text-5xl font-bold mb-4'>All Courses</h1>
       <input className='h-full w-full rounded-[7px] border border-black px-3 py-2.5' type="text" value={keyword} onChange={e=> setKeyword(e.target.value)} />
 
       <div className="buttons flex flex-nowrap gap-4 overflow-x-auto mt-4 mb-9 ">
@@ -107,7 +107,7 @@ const Allcourse = () => {
        }
       </div>
 
-      <div className="coursesdiv grid grid-cols-2 lg:grid-cols-3 gap-7  ">
+      <div className="coursesdiv grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7  ">
       {
         courses.length > 0 ? courses.map((item)=>( 
           <div className="course my-3" key={item._id}>

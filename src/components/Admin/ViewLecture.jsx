@@ -2,28 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getAllCourses, getCourseLectures } from '../../redux/action/courses'
+import { addLecture, deleteLectures } from '../../redux/action/admin'
+import { toast } from 'react-hot-toast'
+import Loader from '../Layout/Loader/Loader'
+import { loadUser } from '../../redux/action/user'
 
 const ViewLecture = () => {
     const {id}=useParams()
     const dispatch=useDispatch()
     const{courses,lectures}=useSelector(state => state.course)
-    console.log("viewlecture",courses)
+    const {loading,error,message}=useSelector(state => state.admin)
+    // console.log("viewCourse",courses)
     console.log(id)
-
-    useEffect(()=>{
-
-        dispatch(getAllCourses())
-        dispatch(getCourseLectures(id))
-    },[dispatch])
-
-    const product = courses.find((product) => product._id === id);
-    console.log("viewLecture",product)
-    console.log("view",lectures)
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [video, setVideo] = useState("");
     const [videoPrev, setVideoPrev] = useState("");
+    const [courseid,setCourseId]=useState(id)
+
+    console.log("courseId", courseid)
 
      //photo upload
   const changeVideoHandler = (e) => {
@@ -36,6 +34,48 @@ const ViewLecture = () => {
       setVideo(file);
     };
   };
+
+  //addLecture start
+  const addLectureHandler=async(e,id)=>{
+    e.preventDefault();
+    const myForm=new FormData()
+    myForm.append("title",title)
+    myForm.append("description",description)
+    myForm.append("file",video)
+
+    await dispatch(addLecture(courseid,myForm))
+    dispatch(loadUser())
+  }
+
+  //deleteLecture 
+  const deleteLecture= async (lectureId)=>{
+    await dispatch(deleteLectures(courseid,lectureId))
+    dispatch(loadUser())
+  }
+
+
+  //get Course Lecture
+    useEffect(()=>{
+
+      if(error){
+        toast.error(error)
+        dispatch({type:'clearError'})
+      }
+  
+      if (message) {
+        toast.success(message);
+        dispatch({ type: 'clearMessage' });
+      }
+ 
+        dispatch(getCourseLectures(id))
+    },[dispatch])
+
+    const product = courses.find((product) => product._id === id);
+    // console.log("getCourseTHisId",product) //not importance
+    console.log("getLectureThisId",lectures)
+  //get course Lecture End
+
+   
   return (
     <div className="main flex flex-col md:flex-row gap-6 w-4/5 mx-auto ">
 
@@ -48,6 +88,7 @@ const ViewLecture = () => {
         
         
         <p>{item.title} </p>
+        <p>#{item._id}</p>
         <p>{item.description}</p>
         <video className='h-52' src={item.video.url}
         
@@ -56,7 +97,7 @@ const ViewLecture = () => {
     disablePictureInPicture
     disableRemotePlayback 
         ></video>
-        <button>Delete</button>
+        <button onClick={()=>deleteLecture(item._id)}>Delete</button>
         
        
         
@@ -68,7 +109,7 @@ const ViewLecture = () => {
 
    <div className="right w-full md:w-3/12">
 
-   <form class="max-w-lg mx-auto">
+   <form onSubmit={addLectureHandler} class="max-w-lg mx-auto">
                 <h1> Add Lecture </h1>
                 <div class="mb-6">
                   <input
@@ -119,12 +160,12 @@ const ViewLecture = () => {
                   ></video>
                 )}
 
-                <button
-                  class="bg-yellow-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-96 "
-                  type="submit"
-                >
-                  upload
-                </button>
+                { loading ? <Loader /> :<button
+                class="bg-yellow-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-96 "
+                type="submit"
+              >
+                upload
+              </button> }
               </form>
    
    
